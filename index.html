@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>DEL5807 — Week 3: Situational Leadership &amp; Follower Development</title><style>
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 62.5%; height:100%; max-width:100vw; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { margin:0; height:100%; background:#ffffff; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size:1.8rem; line-height:1.8; color:#111; overflow:hidden; position:relative; }
+.background-dots { position:fixed; top:0; right:0; width:60%; opacity:0.15; pointer-events:none; z-index:0; }
+.lesson-shell { height:100%; display:flex; flex-direction:column; position:relative; z-index:1; }
+.lesson-shell__header { padding:1.8rem 3rem; background:#fff; border-bottom:1px solid #ececec; display:flex; align-items:center; justify-content:space-between; gap:2rem; }
+.lesson-shell__title { font-size:2.2rem; font-weight:700; line-height:1.2; }
+.lesson-shell__meta { font-size:1.5rem; color:#555; white-space:nowrap; }
+.lesson-shell__body { flex:1; overflow-y:auto; padding:5rem 0; }
+.lesson-page { width:100%; max-width:104rem; margin:0 auto; padding:0 3.2rem; }
+:root { --space-xs:1.4rem; --space-sm:2.2rem; --space-md:3.4rem; --space-lg:5rem; --space-xl:7rem; --blue:#007CFF; --green:#0b6b3a; --ink:#111; --muted:#60656f; --soft:#f5f8fb; --line:#dde4ee; }
+.lesson-block { margin-block:var(--space-xl); padding:var(--space-lg); background:#fff; border-radius:.8rem; }
+.lesson-block.alt { background:#f7f9fb; box-shadow:0 .4rem 1.6rem rgba(0,0,0,.04); }
+.lesson-block.tint { background:#f4f9ff; box-shadow:0 .4rem 1.6rem rgba(0,0,0,.04); }
+.lesson-block h1 { font-size:4rem; line-height:1.12; margin:0 0 var(--space-sm); }
+.lesson-block h2 { font-size:2.8rem; margin:0 0 var(--space-sm); line-height:1.25; }
+.lesson-block h3 { font-size:2rem; margin:0 0 1rem; line-height:1.35; }
+.lesson-block h4 { font-size:1.8rem; margin:0 0 .6rem; line-height:1.35; }
+.lesson-block p { margin:0 0 var(--space-sm); }
+.lesson-block ul { margin:0 0 var(--space-sm); padding-left:2.4rem; }
+.lesson-block li { margin:.6rem 0; }
+.cover-screen { position:fixed; inset:0; background:#fff; z-index:5000; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; transition:opacity .35s ease, visibility .35s ease; }
+.cover-screen.hidden { opacity:0; visibility:hidden; }
+.cover-title { font-size:3.6rem; line-height:1.15; font-weight:750; margin-bottom:3rem; max-width:78rem; }
+.cover-btn { padding:1.2rem 2.4rem; font-size:1.8rem; border-radius:.6rem; border:0; background:var(--blue); color:#fff; cursor:pointer; font-weight:700; transition:background .2s ease; }
+.cover-btn:hover { background:#0066d1; }
+.hero { border-top:.8rem solid var(--blue); background:linear-gradient(180deg,#fff,#f7fbff); }
+.callout { border-left:.6rem solid var(--blue); padding:1.8rem 2.2rem; background:#f4f9ff; border-radius:.4rem; margin:var(--space-sm) 0; font-weight:650; }
+.callout2 { text-align:center; font-size:2.3rem; line-height:1.6; color:#1a1a1a; max-width:76rem; margin:3.6rem auto; padding:2rem 1rem; position:relative; }
+.callout2::before { content:""; width:6rem; height:.3rem; background:var(--green); border-radius:1rem; display:block; margin:0 auto 2rem; }
+.circle-list { padding-left:0 !important; list-style:none; margin-top:2rem; display:grid; gap:1.2rem; }
+.circle-list li { display:flex; align-items:center; margin:0; }
+.circle-num { width:3.2rem; height:3.2rem; border-radius:50%; background:var(--blue); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; margin-right:1rem; flex:0 0 auto; }
+.split { display:grid; grid-template-columns:minmax(0,1fr) minmax(28rem,.8fr); gap:3rem; align-items:start; }
+.panel { border:1px solid var(--line); border-radius:.8rem; padding:2.2rem; background:#fff; }
+.panel.green { border-left:.5rem solid var(--green); }
+.grid-3, .grid-4, .grid-2 { display:grid; gap:1.8rem; margin-top:2rem; }
+.grid-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.grid-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.grid-4 { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.mini-card { border:1px solid var(--line); border-radius:.8rem; padding:2rem; background:#fff; min-height:100%; }
+.mini-card h3, .mini-card h4 { color:#0d3155; }
+.reveal-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(23rem,1fr)); gap:1.6rem; margin-top:2rem; }
+.reveal-card { border:1px solid var(--line); border-radius:.8rem; background:#fff; overflow:hidden; }
+.reveal-btn { width:100%; border:0; background:#eef6ff; color:#10243a; padding:1.6rem; font-size:1.8rem; font-weight:700; text-align:left; cursor:pointer; }
+.reveal-content { display:none; padding:1.8rem; }
+.reveal-card.open .reveal-content { display:block; }
+.accordion { border:1px solid #d9e1ea; border-radius:.8rem; overflow:hidden; background:#fff; }
+.accordion-item + .accordion-item { border-top:1px solid #d9e1ea; }
+.accordion-header { background:#f7f9fb; padding:1.6rem 1.8rem; cursor:pointer; font-size:1.8rem; font-weight:700; }
+.accordion-content { display:none; padding:1.8rem; background:#fff; }
+.accordion-item.open .accordion-content { display:block; }
+.lesson-tabs { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.6rem; }
+.tab-btn { padding:.9rem 1.5rem; border-radius:.7rem; border:1px solid #cbd7e5; background:#fff; cursor:pointer; font-size:1.6rem; font-weight:650; }
+.tab-btn.active { background:#eaf4ff; border-color:#7dbaff; color:#07315b; }
+.tab-content { display:none; margin-top:1.8rem; }
+.tab-content.active { display:block; }
+.card-sequence { position:relative; margin:3rem auto; width:100%; max-width:82rem; }
+.card-sequence::before { content:""; position:absolute; left:2rem; top:0; width:2px; height:100%; background:#d9e1ea; z-index:0; }
+.sequence-card { position:relative; background:#fff; border-radius:.8rem; padding:2.2rem 2.6rem; margin:2.4rem 0 2.4rem 4rem; box-shadow:0 4px 18px rgba(0,0,0,.07); border-left:.4rem solid var(--green); z-index:2; }
+.sequence-date { color:var(--green); font-weight:800; font-size:1.6rem; margin-bottom:.6rem; }
+.choice-block { display:grid; grid-template-columns:28rem 1fr; gap:2rem; align-items:start; }
+.choice-menu { display:grid; gap:1rem; }
+.choice-btn { border:1px solid #cbd7e5; background:#fff; text-align:left; padding:1.4rem 1.6rem; border-radius:.7rem; font-size:1.65rem; font-weight:700; cursor:pointer; }
+.choice-btn.active { border-color:var(--blue); background:#eaf4ff; }
+.choice-panel { display:none; }
+.choice-panel.active { display:block; }
+.comparison { display:grid; grid-template-columns:1fr 1fr; gap:1.8rem; margin-top:2rem; }
+.comparison .panel:first-child { border-top:.5rem solid #7a8a9a; }
+.comparison .panel:last-child { border-top:.5rem solid var(--green); }
+.quote-line { border-block:1px solid var(--line); padding:2.4rem 0; font-weight:700; color:#1b2d40; }
+.section-divider { text-align:center; background:#fff; border-top:.6rem solid var(--green); box-shadow:0 .4rem 1.6rem rgba(0,0,0,.04); }
+.section-divider h2 { margin-bottom:0; }
+.continue-wrap { width:100%; margin:3rem 0; }
+.continue-btn { width:100%; border:0; border-radius:.8rem; background:#006649; color:#fff; min-height:6.4rem; font-size:1.9rem; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 .4rem 1.6rem rgba(0,102,73,.18); transition:background .2s ease, transform .2s ease; }
+.continue-btn:hover { background:#00563e; transform:translateY(-1px); }
+.continue-btn:focus-visible { outline:.3rem solid #7dbaff; outline-offset:.3rem; }
+.template-note { color:var(--muted); font-size:1.6rem; }
+.code-note { display:block; margin-top:1rem; padding:1.4rem 1.6rem; border:1px dashed #cbd7e5; border-radius:.8rem; background:#fbfdff; color:#425466; font-size:1.55rem; }
+@media (max-width:850px) {
+  .lesson-shell__header { align-items:flex-start; flex-direction:column; }
+  .split, .grid-2, .grid-3, .grid-4, .choice-block, .comparison { grid-template-columns:1fr; }
+  .lesson-block { padding:3rem 2rem; margin-block:4rem; }
+  .lesson-page { padding:0 1.8rem; }
+}
+.primary,.cover-btn{padding:1.15rem 2rem;border:0;border-radius:.6rem;background:var(--blue);color:#fff;cursor:pointer;font-size:1.7rem;font-weight:700}.primary:hover,.cover-btn:hover{background:#0066d1}.secondary{padding:1rem 1.5rem;border:1px solid #aebdcd;border-radius:.6rem;background:#fff;cursor:pointer;font-size:1.6rem;font-weight:650}.options{display:grid;gap:1rem;margin:2rem 0}.option{display:flex;gap:1rem;align-items:flex-start;border:1px solid var(--line);border-radius:.7rem;background:#fff;padding:1.3rem 1.5rem;cursor:pointer}.option:hover{border-color:#7dbaff}.option input{margin-top:.55rem;accent-color:var(--blue)}.feedback{display:none;margin-top:1.6rem;padding:1.4rem 1.6rem;border-radius:.6rem;font-weight:650}.feedback.show{display:block}.feedback.correct{background:#e7f6ed;color:#07562d;border-left:.5rem solid var(--green)}.feedback.incorrect{background:#fff0f0;color:#7c1e1e;border-left:.5rem solid var(--red)}.assessment-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.8rem}
+:root{--blue:#006bdb;--red:#a32626}body{height:auto;overflow:auto}.lesson-shell{height:auto;min-height:100vh}.lesson-shell__body{overflow:visible;padding:2rem 0}.lesson-block{margin-block:4rem}button,textarea{font:inherit}:focus-visible{outline:3px solid #006bdb;outline-offset:4px}.lesson-nav{display:flex;flex-wrap:wrap;gap:1rem 2rem;margin-top:2rem}.lesson-nav a{color:#075594;font-size:1.6rem}.eyebrow{font-size:1.5rem;color:#536477;font-weight:700}.circle-list li{align-items:flex-start}.circle-num{margin-top:.4rem}.dimension{margin:2rem 0}.dimension summary{padding:1.4rem 1.8rem;background:#eef6ff;font-weight:650;cursor:pointer}.dimension details p{padding:1.8rem;margin:0}.dimension h3{color:#0d3155}.reflection{margin:2.5rem 0}.reflection label{display:block;margin-bottom:1rem}.reflection textarea{width:100%;min-height:15rem;resize:vertical;padding:1.5rem;border:1px solid #aebdcd;border-radius:.6rem;background:white;color:#111}.assessment+.assessment{border-top:1px solid var(--line);padding-top:3rem;margin-top:3rem}fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-weight:650;padding:0}.skip-link{position:absolute;top:-10rem;left:1rem;background:white;padding:1rem;z-index:10}.skip-link:focus{top:1rem}.mini-card h3{font-size:1.9rem}.notes-status{min-height:2rem;font-size:1.6rem;color:#07562d}@media(max-width:850px){.lesson-block h1{font-size:3.2rem}.lesson-shell__meta{white-space:normal}}@media print{body{font-size:12pt}.lesson-block{padding:1rem;margin:2rem 0;break-inside:avoid}.lesson-nav,.assessment-actions,.check,.skip-link{display:none}details::details-content{display:block}.reflection textarea{min-height:12rem}}
+
+.match-card{margin:2rem 0;padding:2.2rem;border:1px solid var(--line);border-radius:.8rem;background:white}.match-card label{display:block;font-weight:650;margin-bottom:1rem}.match-card select{width:100%;font:inherit;padding:1rem;border:1px solid #aebdcd;border-radius:.5rem;background:white}.match-card .feedback{font-size:1.65rem}.framework-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.8rem}.framework-grid .mini-card{border-top:4px solid var(--blue)}.framework-grid .mini-card:nth-child(2){border-color:#0b6b3a}.framework-grid .mini-card:nth-child(3){border-color:#84521d}.framework-grid .mini-card:nth-child(4){border-color:#7758a0}.comparison ul{margin-bottom:0}.comparison h3{margin-bottom:2rem}.skill-section{margin:2.2rem 0}.skill-section h3{color:#0d3155}@media(max-width:850px){.framework-grid{grid-template-columns:1fr}}
+</style></head><body><a class="skip-link" href="#intro">Skip to lesson</a><div class="lesson-shell"><header class="lesson-shell__header"><div class="lesson-shell__title">DEL 5807: Leadership Foundations</div><div class="lesson-shell__meta">Week 3</div></header><main class="lesson-shell__body"><div class="lesson-page"><section class="lesson-block hero" id="intro"><p class="eyebrow">DEL 5807 · Week 3</p><h1>Situational Leadership &amp; Follower Development</h1><h2>1. Banner &amp; Introduction</h2><p>Welcome to Week 3 of DEL 5807: Leadership Foundations! Over the past two weeks, we examined individual leadership traits, authentic identity, and core values. This week, we introduce a crucial pivot: moving from individual self-reflection to situational flexibility and follower development.</p><p>In complex organizational environments, executive effectiveness is rarely about applying a single preferred leadership style. Instead, as Blanchard&#x27;s SLII® model demonstrates, high-performing leaders continuously evaluate follower development (competence and commitment) on specific tasks and dynamically calibrate their combination of directive and supportive behaviors. Furthermore, by linking situational leadership with Katz&#x27;s Three-Skill Model, executives learn how to elevate their strategic focus while providing appropriate operational guidance.</p><nav class="lesson-nav" aria-label="Lesson sections"><a href="#section-2">Key Takeaways</a><a href="#section-3">SLII® Framework</a><a href="#section-4">Katz’s Skills</a><a href="#section-5">Strengths & Criticisms</a><a href="#section-6">Capstone</a><a href="#section-7">Knowledge Checks</a></nav></section>
+<section class="lesson-block alt" id="section-2"><h2>2. Module Key Takeaways</h2>
+<ol class="circle-list">
+<li><span class="circle-num" aria-hidden="true">1</span><span>Leadership is Goal-Specific, Not Fixed: Effective leadership is contingent on matching your behavior (Directive vs. Supportive) to the specific development level (Competence vs. Commitment) of a follower on a given task.</span></li>
+<li><span class="circle-num" aria-hidden="true">2</span><span>Bridging Situational Demands with Katz&#x27;s Skills Model: As leaders ascend into executive roles, technical execution must yield to conceptual strategy and human interaction. However, when followers face new or complex tasks (D1/D2), executives must temporarily re-engage directive or coaching behaviors.</span></li>
+<li><span class="circle-num" aria-hidden="true">3</span><span>The Danger of Style Misalignment: Over-directing highly competent followers (D4) causes micromanagement and burnout, while under-directing developing followers (D1) leads to operational error and frustration.</span></li>
+</ol>
+</section>
+<section class="lesson-block " id="section-3"><h2>3. Section 1: The SLII® Framework – Leadership Styles &amp; Development Levels</h2>
+<h3>The Four Leadership Styles (S1–S4)</h3><div class="framework-grid">
+<article class="mini-card"><h4>S1 – Directing:</h4><p>High directive, low supportive behavior. The leader gives explicit instructions, establishes goals, and closely supervises execution.</p></article>
+<article class="mini-card"><h4>S2 – Coaching:</h4><p>High directive, high supportive behavior. The leader provides directions and makes final decisions while soliciting feedback, encouraging input, and supporting emotional needs.</p></article>
+<article class="mini-card"><h4>S3 – Supporting:</h4><p>High supportive, low directive behavior. The leader facilitates problem-solving, listens, praises, and delegates day-to-day decision-making authority to the follower.</p></article>
+<article class="mini-card"><h4>S4 – Delegating:</h4><p>Low supportive, low directive behavior. The leader delegates full responsibility for task execution and decision-making to a highly capable follower.</p></article>
+</div><h3>The Four Development Levels (D1–D4)</h3><p class="template-note">Choose the leadership style that fits each follower’s development level on the task. Check each match for feedback.</p>
+<article class="match-card" data-answer="3"><h4>D3 – Moderate-High Competence / Variable Commitment:</h4><p>Moderate to high competence, variable commitment (e.g., capable performer lacking self-confidence or alignment).</p><label for="style-2">Leadership style</label><select id="style-2"><option value="">Choose a style…</option><option value="1">S1 – Directing</option><option value="2">S2 – Coaching</option><option value="3">S3 – Supporting</option><option value="4">S4 – Delegating</option></select><div class="assessment-actions"><button type="button" class="primary match-check">Check match</button></div><div class="feedback" role="status"></div></article>
+<article class="match-card" data-answer="1"><h4>D1 – Low Competence / High Commitment:</h4><p>Low competence, high commitment (e.g., enthusiastic beginner needing clear direction).</p><label for="style-0">Leadership style</label><select id="style-0"><option value="">Choose a style…</option><option value="1">S1 – Directing</option><option value="2">S2 – Coaching</option><option value="3">S3 – Supporting</option><option value="4">S4 – Delegating</option></select><div class="assessment-actions"><button type="button" class="primary match-check">Check match</button></div><div class="feedback" role="status"></div></article>
+<article class="match-card" data-answer="4"><h4>D4 – High Competence / High Commitment:</h4><p>High competence, high commitment (e.g., seasoned expert fully capable of autonomous execution).</p><label for="style-3">Leadership style</label><select id="style-3"><option value="">Choose a style…</option><option value="1">S1 – Directing</option><option value="2">S2 – Coaching</option><option value="3">S3 – Supporting</option><option value="4">S4 – Delegating</option></select><div class="assessment-actions"><button type="button" class="primary match-check">Check match</button></div><div class="feedback" role="status"></div></article>
+<article class="match-card" data-answer="2"><h4>D2 – Some Competence / Low Commitment:</h4><p>Low to some competence, low commitment (e.g., disillusioned learner needing direction and encouragement).</p><label for="style-1">Leadership style</label><select id="style-1"><option value="">Choose a style…</option><option value="1">S1 – Directing</option><option value="2">S2 – Coaching</option><option value="3">S3 – Supporting</option><option value="4">S4 – Delegating</option></select><div class="assessment-actions"><button type="button" class="primary match-check">Check match</button></div><div class="feedback" role="status"></div></article>
+</section>
+<section class="lesson-block tint" id="section-4"><h2>4. Section 2: Integrating Katz&#x27;s Three-Skill Model with Situational Leadership</h2>
+<p>In Chapter 3, Robert Katz outlines three essential administrative skills: Technical, Human, and Conceptual. Executive leadership demands a clear shift in how these skills are deployed across situational demands:</p>
+<article class="panel green skill-section"><h3>Technical Skill Integration:</h3><p>Critical at lower operational levels, but decreases in direct operational importance for top executives. However, when managing D1/D2 followers on technical tasks, leaders must possess enough technical understanding to set clear standards.</p></article>
+<article class="panel green skill-section"><h3>Human Skill Integration:</h3><p>Paramount across all organizational levels and all development stages (D1–D4). Effective human skills enable leaders to listen, build trust, provide constructive feedback, and assess follower readiness accurately.</p></article>
+<article class="panel green skill-section"><h3>Conceptual Skill Integration:</h3><p>Vital at upper executive levels. Conceptual skills allow leaders to formulate overall vision and strategic direction, empowering D3 and D4 followers to execute autonomously while maintaining systemic alignment.</p></article>
+</section>
+<section class="lesson-block " id="section-5"><h2>5. Section 3: Diagnostic Precision &amp; Strengths/Criticisms of SLII®</h2>
+<div class="comparison">
+<article class="panel"><h3>Strengths of the Situational Approach</h3><ul><li>Marketplace Practicality: Widely validated in corporate training (used by over 10,000 organizations and Fortune 500 companies).</li><li>Prescriptive Value: Offers explicit &#x27;if-then&#x27; guidance for matching leadership behavior to follower readiness.</li><li>Dynamic Flexibility: Rejects one-size-fits-all leadership, requiring executives to adjust behaviors dynamic to changing project phases.</li></ul></article>
+<article class="panel"><h3>Criticisms &amp; Theoretical Caveats</h3><ul><li>Limited Empirical Research: Sparse published research verifying the exact theoretical progression of commitment drops from D1 to D2.</li><li>Group vs. Individual Dynamics: The model does not fully address how executives adapt styles simultaneously when leading groups with diverse individual readiness levels.</li><li>Demographic Variables: Fails to account for how age, gender, education, and cultural norms influence follower preferences for direction versus support.</li></ul></article>
+</div>
+</section>
+<section class="lesson-block tint" id="section-6"><h2>6. Capstone Integration: Preparing for Weeks 7 &amp; 8</h2>
+<h3>🎯 Connecting Week 3 to Your Capstone Deliverables</h3><p>As you evaluate Situational Leadership and Katz&#x27;s Skill Model this week:</p><p class="template-note">Draft your capstone notes below. Download a copy to keep them; responses are cleared when you close or reload this page.</p>
+<div class="reflection"><label for="reflection-0">Diagnose Your Default Style: Are you naturally drawn to S1 Directing, S2 Coaching, S3 Supporting, or S4 Delegating? Where do you risk misaligning with follower needs?</label><textarea id="reflection-0" spellcheck="true"></textarea></div>
+<div class="reflection"><label for="reflection-1">Map Your Skill Transition: Reflect on how your balance of Technical vs. Conceptual skills has shifted as you advanced into executive leadership.</label><textarea id="reflection-1" spellcheck="true"></textarea></div>
+<div class="reflection"><label for="reflection-2">Document Operational Examples: Save your situational diagnostic insights for inclusion in your Executive Leadership Philosophy (Week 7) and Executive Leadership Memorandum (Week 8).</label><textarea id="reflection-2" spellcheck="true"></textarea></div>
+<div class="assessment-actions"><button type="button" class="primary" id="downloadNotes">Download notes</button></div><p class="notes-status" id="notesStatus" role="status"></p>
+</section>
+<section class="lesson-block alt" id="section-7"><h2>7. Knowledge Check Questions</h2>
+<div class="assessment" id="question-0" data-answer="d"><fieldset><legend>Question 1: A senior vice president assigns a complex regional merger project to a highly experienced director who has successfully managed three previous corporate integrations. The director is confident and motivated. According to the SLII® model, which leadership style should the vice president employ?</legend><div class="options">
+<label class="option"><input type="radio" name="question-0" value="a"><span>A) S1 Directing</span></label>
+<label class="option"><input type="radio" name="question-0" value="b"><span>B) S2 Coaching</span></label>
+<label class="option"><input type="radio" name="question-0" value="c"><span>C) S3 Supporting</span></label>
+<label class="option"><input type="radio" name="question-0" value="d"><span>D) S4 Delegating</span></label>
+</div></fieldset><button type="button" class="primary check">Check answer</button><div class="feedback" role="status"></div></div>
+<div class="assessment" id="question-1" data-answer="b"><fieldset><legend>Question 2: According to Katz&#x27;s Three-Skill Model, as an individual advances from lower-level management to upper-level executive leadership, which skill becomes LEAST critical to their daily operational responsibilities?</legend><div class="options">
+<label class="option"><input type="radio" name="question-1" value="a"><span>A) Conceptual Skill</span></label>
+<label class="option"><input type="radio" name="question-1" value="b"><span>B) Technical Skill</span></label>
+<label class="option"><input type="radio" name="question-1" value="c"><span>C) Human Skill</span></label>
+<label class="option"><input type="radio" name="question-1" value="d"><span>D) Strategic Skill</span></label>
+</div></fieldset><button type="button" class="primary check">Check answer</button><div class="feedback" role="status"></div></div>
+</section></div></main></div><script>
+const explanations=["The follower is at Development Level 4 (D4: High Competence, High Commitment). The prescribed leadership style for D4 is S4 Delegating (Low Directive, Low Supportive behavior).", "Katz's model demonstrates that while Human skills remain essential at all levels and Conceptual skills become paramount at top executive levels, Technical skills become less important as top leaders rely on skilled followers for technical execution."];
+const hints=[{
+ a:'Directing provides close supervision for a follower with low competence. This director has demonstrated competence and commitment.',
+ b:'Coaching combines direction and encouragement for a developing follower. Consider the director’s successful experience and motivation.',
+ c:'Supporting fits a capable follower with variable commitment. The director here is both confident and motivated.'
+},{
+ a:'Conceptual skills become more important at upper executive levels. Reconsider which responsibilities shift toward skilled followers.',
+ c:'Human skills remain essential at every level. Reconsider which responsibilities shift toward skilled followers.',
+ d:'Strategic direction remains central to executive work. Katz’s three domains are Technical, Human, and Conceptual.'
+}];
+function feedback(block,good,message){const box=block.querySelector('.feedback');box.className='feedback show '+(good?'correct':'incorrect');box.textContent=message;}
+document.querySelectorAll('.assessment').forEach((block,i)=>{
+ block.querySelector('.check').addEventListener('click',()=>{
+  const chosen=block.querySelector('input:checked'),correct=!!chosen&&chosen.value===block.dataset.answer;
+  feedback(block,correct,!chosen?'Select an answer before checking.':correct?'Correct. '+explanations[i]:'Not quite. '+hints[i][chosen.value]+' Try again.');
+ });
+ block.querySelectorAll('input').forEach(input=>input.addEventListener('change',()=>{block.querySelector('.feedback').className='feedback';block.querySelector('.feedback').textContent='';}));
+});
+const matches={
+ 1:'Low competence calls for explicit direction; high commitment means less supportive behavior is needed. D1 pairs with S1 Directing.',
+ 2:'Developing competence requires direction, while low commitment calls for encouragement and support. D2 pairs with S2 Coaching.',
+ 3:'The follower can perform the task but needs support for variable commitment or confidence. D3 pairs with S3 Supporting.',
+ 4:'High competence and high commitment support autonomous execution. D4 pairs with S4 Delegating.'
+};
+const retry={1:'Focus on the need for clear instructions for a beginner who is already motivated.',2:'Consider a style that addresses both developing competence and low commitment.',3:'Consider how to support confidence without taking over a task the follower can perform.',4:'Consider how much direction and support a capable, committed follower needs.'};
+document.querySelectorAll('.match-card').forEach(block=>{
+ const select=block.querySelector('select');
+ block.querySelector('.match-check').addEventListener('click',()=>{const good=select.value===block.dataset.answer;feedback(block,good,!select.value?'Choose a leadership style before checking.':good?'Correct. '+matches[block.dataset.answer]:'Not quite. '+retry[block.dataset.answer]+' Try again.');});
+ select.addEventListener('change',()=>{block.querySelector('.feedback').className='feedback';block.querySelector('.feedback').textContent='';});
+});
+document.getElementById('downloadNotes').addEventListener('click',()=>{
+ const notes=[...document.querySelectorAll('.reflection')].map(row=>row.querySelector('label').textContent+'\n'+row.querySelector('textarea').value.trim());
+ const status=document.getElementById('notesStatus');
+ if(![...document.querySelectorAll('textarea')].some(field=>field.value.trim())){status.textContent='Write a response before downloading your notes.';document.querySelector('textarea').focus();return;}
+ const blob=new Blob(['DEL 5807 — Week 3 Capstone Notes\n\n'+notes.join('\n\n')],{type:'text/plain;charset=utf-8'});
+ const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='DEL5807-week-3-capstone-notes.txt';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='Notes downloaded. Keep the file for your capstone preparation.';
+});
+</script></body></html>
